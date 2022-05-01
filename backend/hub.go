@@ -4,12 +4,6 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type Msg struct {
-	User     string `json:"user"`
-	Message  string `json:"message,omitempty"`
-	LeftChat bool   `json:"left_chat"`
-}
-
 type Hub struct {
 	clients map[*Client]bool
 
@@ -44,7 +38,7 @@ func (h *Hub) Run() {
 				h.logger.Infof("unregistered client with username: %s", client.name)
 				delete(h.clients, client)
 				close(client.send)
-				h.broadcast <- Msg{User: client.name, LeftChat: true}
+				h.broadcast <- Msg{Type: Disconnect, User: client.name}
 			}
 		case msg := <-h.broadcast:
 			for client := range h.clients {

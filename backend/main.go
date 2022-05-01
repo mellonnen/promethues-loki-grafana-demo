@@ -8,7 +8,21 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+type MsgType int
+
+const (
+	Connect MsgType = iota
+	Message
+	Disconnect
+)
+
 var addr = flag.String("addr", ":8080", "http service address")
+
+type Msg struct {
+	Type    MsgType
+	User    string `json:"user"`
+	Message string `json:"message,omitempty"`
+}
 
 func main() {
 	flag.Parse()

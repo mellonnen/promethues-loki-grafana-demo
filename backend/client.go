@@ -101,7 +101,7 @@ func ClientHandler(hub *Hub) http.HandlerFunc {
 			logger: logger,
 		}
 
-		client.conn.WriteJSON(Msg{User: client.name})
+		client.conn.WriteJSON(Msg{Type: Connect, User: client.name})
 		client.hub.register <- client
 
 		client.logger.Infoln("successfully initialized client, starting read/write loops")
