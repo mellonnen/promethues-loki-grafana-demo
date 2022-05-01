@@ -1,6 +1,8 @@
 package main
 
 import (
+	"time"
+
 	"github.com/sirupsen/logrus"
 )
 
@@ -38,7 +40,7 @@ func (h *Hub) Run() {
 				h.logger.Infof("unregistered client with username: %s", client.name)
 				delete(h.clients, client)
 				close(client.send)
-				h.broadcast <- Msg{Type: Disconnect, User: client.name}
+				h.broadcast <- Msg{Type: Disconnect, User: client.name, Timestamp: time.Now()}
 			}
 		case msg := <-h.broadcast:
 			for client := range h.clients {

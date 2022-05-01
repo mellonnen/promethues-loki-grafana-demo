@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"net/http"
+	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
@@ -19,9 +20,10 @@ const (
 var addr = flag.String("addr", ":8080", "http service address")
 
 type Msg struct {
-	Type    MsgType
-	User    string `json:"user"`
-	Message string `json:"message,omitempty"`
+	Type      MsgType   `json:"type"`
+	User      string    `json:"user"`
+	Timestamp time.Time `json:"timestamp"`
+	Message   string    `json:"message,omitempty"`
 }
 
 func main() {
