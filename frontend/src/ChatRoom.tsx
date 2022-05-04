@@ -1,8 +1,10 @@
-// type ChatRoomProps = {
-//   url: string;
-//   myUsername: string;
-// };
+type ChatRoomProps = {
+  myUsername: string;
+};
 
-const ChatRoom = () => <div>ChatRoom</div>;
+const ChatRoom = (props: ChatRoomProps) => {
+  const { myUsername } = props;
+  return <div>{myUsername}</div>;
+};
 
 export default ChatRoom;
