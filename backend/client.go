@@ -21,6 +21,7 @@ const (
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
+	CheckOrigin:     func(r *http.Request) bool { return true }, // allow all
 }
 
 type Client struct {
@@ -101,8 +102,8 @@ func ClientHandler(hub *Hub) http.HandlerFunc {
 			logger: logger,
 		}
 
-		client.conn.WriteJSON(Msg{Type: Connect, User: client.name, Timestamp: time.Now()})
 		client.hub.register <- client
+		client.send <- Msg{Type: Connect, User: client.name, Timestamp: time.Now()}
 
 		client.logger.Infoln("successfully initialized client, starting read/write loops")
 
