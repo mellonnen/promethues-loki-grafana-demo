@@ -49,6 +49,7 @@ const ChatRoom = (props: ChatRoomProps) => {
             timestamp: new Date(),
           };
           ws.current?.send(JSON.stringify(msg));
+          setCurrentMsg("");
         }}
         placeholder="write message"
       />
