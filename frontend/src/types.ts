@@ -1,12 +1,12 @@
 export enum MsgType {
-  Connected = 1,
+  Connect = 0,
   Message,
   Disconnected,
 }
 
 export interface Msg {
-  Type: MsgType;
-  User: string;
-  Message?: string;
-  Timestamp: Date;
+  type: MsgType;
+  user: string;
+  message?: string;
+  timestamp: Date;
 }

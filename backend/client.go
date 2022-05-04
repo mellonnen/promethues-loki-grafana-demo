@@ -86,8 +86,6 @@ func (c *Client) write() {
 func ClientHandler(hub *Hub) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		logger := LoggerFromContext(r.Context())
-		name := nextName()
-		logger = logger.WithField("username", name)
 
 		conn, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
@@ -95,15 +93,24 @@ func ClientHandler(hub *Hub) http.HandlerFunc {
 			return
 		}
 		client := &Client{
-			name:   name,
 			hub:    hub,
 			conn:   conn,
 			send:   make(chan Msg, 256),
 			logger: logger,
 		}
+		var msg Msg
 
+		client.conn.ReadJSON(&msg)
+
+		if msg.Type != Connect {
+			client.logger.Errorf("wrong message type, expected %d, got %d", Connect, msg.Type)
+			conn.Close()
+			return
+		}
+
+		client.name = msg.User
 		client.hub.register <- client
-		client.send <- Msg{Type: Connect, User: client.name, Timestamp: time.Now()}
+		client.send <- msg
 
 		client.logger.Infoln("successfully initialized client, starting read/write loops")
 
