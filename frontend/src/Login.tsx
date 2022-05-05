@@ -9,6 +9,7 @@ const Login = (props: LoginProps) => {
   const [user, setUser] = useState("");
   return (
     <form
+      className="login"
       onSubmit={() => {
         login(user);
       }}

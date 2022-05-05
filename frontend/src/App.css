@@ -1,3 +1,10 @@
+.login {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     font: 16px/1.5 sans-serif;
+     transform: translate(-50%,-50%);
+}
 .chatRoom{
   --rad: 20px;
   --rad-sm: 3px;
