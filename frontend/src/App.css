@@ -1,16 +1,38 @@
-.chat {
+.chatRoom{
   --rad: 20px;
   --rad-sm: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: stretch;
+}
+.chat {
   font: 16px/1.5 sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  max-width: 500px;
+  width: 75%;
+  height: 800px;
   margin: auto;
+  overflow-y: scroll;
 }
 
+.chatRoom > input {
+  font: 16px/1.5 sans-serif;
+  width: 75%;
+  padding: 7px 15px;
+  border-radius: var(--rad);
+  background: #ffff;
+  border-color: #FF4D00;
+  border-style: solid;
+  color: #555;
+  margin: 10px;
+}
 
+.chatRoom > input:focus {
+  outline: none;
+}
 .msg {
   position: relative;
   max-width: 75%;
@@ -20,7 +42,7 @@
 
 .msg.sent {
   border-radius: var(--rad) var(--rad) var(--rad-sm) var(--rad);
-  background: #42a5f5;
+  background: #FF4D00;
   color: #fff;
   /* moves it to the right */
   align-self: flex-end;
@@ -69,4 +91,5 @@
   /* Show only for first message in group */
   display: block;
 }
+
 

@@ -15,6 +15,7 @@ const ChatRoom = (props: ChatRoomProps) => {
   const [currentMsg, setCurrentMsg] = useState("");
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const ws = useRef<WebSocket>();
+  const scroll = useRef<HTMLDivElement>(null);
   useEffect(() => {
     ws.current = new WebSocket("ws://localhost:8080/chat");
     ws.current.onopen = () => {
@@ -31,11 +32,12 @@ const ChatRoom = (props: ChatRoomProps) => {
     };
   }, []);
   return (
-    <div>
+    <div className="chatRoom">
       <div className="chat">
         {msgs.map((m) => (
           <ChatMessage msg={m} myUsername={myUsername} />
         ))}
+        <div ref={scroll} />
       </div>
       <input
         type="text"
@@ -52,6 +54,7 @@ const ChatRoom = (props: ChatRoomProps) => {
           };
           ws.current?.send(JSON.stringify(msg));
           setCurrentMsg("");
+          scroll.current?.scrollIntoView();
         }}
         placeholder="write message"
       />
