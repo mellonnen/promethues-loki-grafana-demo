@@ -67,6 +67,7 @@ func (c *Client) write() {
 			c.conn.SetWriteDeadline(time.Now().Add(writeWait))
 			if !ok {
 				c.conn.WriteMessage(websocket.CloseMessage, []byte{})
+				return
 			}
 			c.conn.WriteJSON(msg)
 			n := len(c.send)
@@ -110,11 +111,11 @@ func ClientHandler(hub *Hub) http.HandlerFunc {
 
 		client.name = msg.User
 		client.hub.register <- client
-		client.send <- msg
 
 		client.logger.Infoln("successfully initialized client, starting read/write loops")
 
 		go client.read()
 		go client.write()
+		client.hub.broadcast <- msg
 	})
 }
