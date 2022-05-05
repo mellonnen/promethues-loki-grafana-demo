@@ -19,26 +19,18 @@
 }
 
 .msg.sent {
-  border-radius: var(--rad);
+  border-radius: var(--rad) var(--rad) var(--rad-sm) var(--rad);
   background: #42a5f5;
   color: #fff;
   /* moves it to the right */
   align-self: flex-end;
 }
 .msg.rcvd {
-  border-radius: var(--rad);
+  border-radius: var(--rad) var(--rad) var(--rad) var(--rad-sm);
   background: #f1f1f1;
   color: #555;
   /* moves it to the left */
   align-self: flex-start;
-}
-
-.msg.sent:last-child {
-  border-bottom-right-radius: var(--rad-sm);
-}
-
-.msg.rcvd:last-child{
-  border-bottom-left-radius: var(--rad-sm);
 }
 
 .msg.info {
