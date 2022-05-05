@@ -1,7 +1,7 @@
 export enum MsgType {
   Connect = 0,
   Message,
-  Disconnected,
+  Disconnect,
 }
 
 export interface Msg {

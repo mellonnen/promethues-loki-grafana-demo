@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import ChatMessage from "./ChatMessage";
 import names from "./names";
 import { Msg, MsgType } from "./types";
 
@@ -31,13 +32,14 @@ const ChatRoom = (props: ChatRoomProps) => {
   }, []);
   return (
     <div>
-      <ol>
+      <div className="chat">
         {msgs.map((m) => (
-          <li>{m.user}</li>
+          <ChatMessage msg={m} myUsername={myUsername} />
         ))}
-      </ol>
+      </div>
       <input
         type="text"
+        className="chat-input"
         value={currentMsg}
         onChange={(e) => setCurrentMsg(e.target.value)}
         onKeyDown={(e) => {

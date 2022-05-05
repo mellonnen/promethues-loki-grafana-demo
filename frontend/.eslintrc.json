@@ -17,7 +17,8 @@
   },
   "extends": [
     "plugin:react/recommended",
-    "airbnb"
+    "airbnb",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -46,6 +47,7 @@
       "error"
     ],
     "react/function-component-definition": "off",
-    "import/extensions": "off"
+    "import/extensions": "off",
+    "no-nested-ternary": "off"
   }
 }
