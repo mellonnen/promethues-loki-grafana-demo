@@ -7,10 +7,11 @@ type ChatMessageProps = {
 
 const ChatMessage = (props: ChatMessageProps) => {
   const { msg, myUsername } = props;
-  const time = new Date(msg.timestamp)
-    .toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-    .replace(" AM", "")
-    .replace(" PM", "");
+  const time = new Date(msg.timestamp).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
 
   const dataTime = msg.user === myUsername ? time : `${msg.user} ${time}`;
 

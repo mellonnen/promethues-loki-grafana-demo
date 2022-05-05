@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 type LoginProps = {
   login: (name: string) => void;
@@ -8,12 +7,10 @@ type LoginProps = {
 const Login = (props: LoginProps) => {
   const { login } = props;
   const [user, setUser] = useState("");
-  const navigate = useNavigate();
   return (
     <form
       onSubmit={() => {
         login(user);
-        navigate("/chat");
       }}
     >
       <h1>Login</h1>
