@@ -1,0 +1,26 @@
+version: '3.4'
+networks:
+  net:
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - net
+        
+  frontend:
+    container_name: frontend
+    stdin_open: true
+    build:
+        context: ./frontend
+        dockerfile: Dockerfile
+    ports:
+      - "6000:80"
+    depends_on:
+      - backend
+    networks:
+      - net
