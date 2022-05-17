@@ -11,10 +11,6 @@ services:
       - "8080:8080"
     networks:
       - net
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://localhost:3100/loki/api/v1/push"
         
   frontend:
     container_name: frontend
