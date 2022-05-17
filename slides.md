@@ -211,4 +211,4 @@ $ docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-a
 
 ---
 
-# Thanks for listing!
+# Thanks for listening!
